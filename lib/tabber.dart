@@ -31,7 +31,7 @@ class _TabBarDemoState extends State<TabBarDemo> {
                 Tab(icon: Icon(Icons.message)),
               ],
             ),
-            title: Text('Tabs Demo'),
+            title: Text('Tabs Democchhhaaannnnnggggeeeeeeee'),
           ),
           body: TabBarView(
             children: [
