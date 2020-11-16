@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "358459364347",
+    "firebase_url": "https://worthilator.firebaseio.com",
+    "project_id": "worthilator",
+    "storage_bucket": "worthilator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358459364347:android:e2f45595d7fb8b4363715e",
+        "android_client_info": {
+          "package_name": "com.example.letsmake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358459364347-cj2idk2h3hlu31buf8pd5227aa3m9894.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.letsmake",
+            "certificate_hash": "c16b21a005c1242fd72e444caba3df193e5b0844"
+          }
+        },
+        {
+          "client_id": "358459364347-afro0peek0bemseshv59m07nhsah5ehh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEds3y8PiJvwjYpJyx64kTEtbOWDp15ys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358459364347-afro0peek0bemseshv59m07nhsah5ehh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
