@@ -6,17 +6,21 @@ import 'package:letsmake/form.dart';
 class TabBarDemo extends StatefulWidget {
   final User user;
   TabBarDemo(this.user);
+  
   @override
   _TabBarDemoState createState() => _TabBarDemoState();
 }
 
 class _TabBarDemoState extends State<TabBarDemo> {
+  GlobalKey<ScaffoldState> scaffoldState = new GlobalKey();
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
+          key: scaffoldState,
           appBar: AppBar(
             backgroundColor: Colors.deepPurple,
             //shadowColor: Colors.deepPurple,
@@ -31,12 +35,12 @@ class _TabBarDemoState extends State<TabBarDemo> {
                 Tab(icon: Icon(Icons.message)),
               ],
             ),
-            title: Text('Tabs Democchhhaaannnnnggggeeeeeeee'),
+            title: Text('Worthilator'),
           ),
           body: TabBarView(
             children: [
               MyCustomForm(this.widget.user),
-              Sirala(this.widget.user),
+              Sirala(this.widget.user,),
               Icon(Icons.directions_bike),
             ],
           ),

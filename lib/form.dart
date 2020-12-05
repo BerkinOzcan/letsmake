@@ -83,6 +83,14 @@ void showOops(var err) {
       'fiyat': dr.fiyat,
       'puan': dr.puanHesapla(),
     }).then((value) {
+      showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (_) => AlertDialog(
+                  title: Text("Okeyto"),
+                  content: Text(
+                      "İçkini ekledim babacım \n Orta sekmedeki sıralama ekranından bakabilirsin (Sıralama ekranını yenilemek için iki sağ sol yap kendine gelir kerata)."),
+                ));
       print("added the drink ma boi");
     }).catchError((error) => showOops(error));
   }
@@ -116,6 +124,7 @@ void showOops(var err) {
                 
                 //maxLengthEnforced: false,
                 decoration: InputDecoration(
+                  
                   helperText: "örn. Efes Malt",
                   //hintText: "Buraya içeceğin ismini girin",
 
@@ -152,6 +161,7 @@ void showOops(var err) {
                   //contentPadding: EdgeInsets.all(16.0),
                   prefixIcon: Icon(Icons.local_drink),
                   border: OutlineInputBorder(
+                    
                       borderRadius: BorderRadius.circular(10.0)),
                 ),
                 validator: (value) {
@@ -281,7 +291,7 @@ void showOops(var err) {
 //TODO: aynı içkinin aynısının tıpkısını bidaha ekleyememesi lazım.
                       // If the form is valid, display a Snackbar.
                       Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text('Processing Data')));
+                          SnackBar(content: Text('Ekliyorum babacım bi saniye')));
                     }
                   },
                   // Validate returns true if the form is valid, or false

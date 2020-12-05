@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:letsmake/Drink.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class Sirala extends StatefulWidget {
   final User user;
+  
   Sirala(this.user) {
     print("siralasirala");
     print(this.user.displayName);
@@ -118,12 +120,14 @@ class _SiralaState extends State<Sirala> {
                             drs.isim,
                           ),
                           showEditIcon: true,
+                          
                           onTap: () {
                             print("TIKLANAN ID: ${drs.docId}");
                             showDialog(
                                 context: context,
                                 barrierDismissible: true,
-                                builder: (_) => EditField(this.widget.user, drs));
+                                builder: (_) =>
+                                    EditField(this.widget.user, drs));
                           },
                         ),
                         DataCell(
@@ -195,31 +199,65 @@ class EditField extends StatefulWidget {
 class _EditFieldState extends State<EditField> {
   String _text;
   TextEditingController _c;
-CollectionReference users = FirebaseFirestore.instance.collection('users');
- 
-
-
-Future<void> editDrinkName() {
-  return users
-    .doc(this.widget.usa.uid).collection('drinks').doc(this.widget.drdr.docId)
-    .update({'isim': _text})
-    .then((value) {
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  Future<void> deleteDrink() {
+    return users
+        .doc(this.widget.usa.uid)
+        .collection('drinks')
+        .doc(this.widget.drdr.docId)
+        .delete().then((value) {
       setState(() {
-         print("drink name updated!");
-    Navigator.of(context, rootNavigator: true).pop('dialog');
-      });
-     
-    })
-    .catchError((error) => showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (_) => AlertDialog(
-              title: Text("Oops"),
-              content: Text("Hiçbir şey olmasa bile bir şeyler oldu! \n İnternet bağlantını falan kontrol et. \n Uygulamayı yeniden falan başlat ben ne biliyim."),
-            )));
-}
+        print("drink deleted!");
 
-  
+        Navigator.of(context, rootNavigator: true).pop('dialog');
+        showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (_) => AlertDialog(
+                  title: Text("Silme Başarılı!"),
+                  content: Text(
+                      "Emin misin diye sormadım çünkü bizde R olmaz \n Sekmeler arası bi sağ sol yap yenilenir."),
+                ));
+      });
+    }).catchError((error) => showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (_) => AlertDialog(
+                  title: Text("Oops"),
+                  content: Text(
+                      "Hiçbir şey olmasa bile bir şeyler oldu! \n İnternet bağlantını falan kontrol et. \n Uygulamayı yeniden falan başlat ben ne biliyim."),
+                )));
+  }
+
+  Future<void> editDrinkName() {
+    return users
+        .doc(this.widget.usa.uid)
+        .collection('drinks')
+        .doc(this.widget.drdr.docId)
+        .update({'isim': _text}).then((value) {
+      setState(() {
+        print("drink name updated!");
+
+        Navigator.of(context, rootNavigator: true).pop('dialog');
+        showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (_) => AlertDialog(
+                  title: Text("Düzenleme Başarılı!"),
+                  content: Text(
+                      "Düzenleme başarılı kardeşim hayırlı olsun \n Sekmeler arası bi sağ sol yap yenilenir."),
+                ));
+      });
+    }).catchError((error) => showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (_) => AlertDialog(
+                  title: Text("Oops"),
+                  content: Text(
+                      "Hiçbir şey olmasa bile bir şeyler oldu! \n İnternet bağlantını falan kontrol et. \n Uygulamayı yeniden falan başlat ben ne biliyim."),
+                )));
+  }
+
   @override
   void initState() {
     _c = new TextEditingController();
@@ -229,20 +267,29 @@ Future<void> editDrinkName() {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("EDIT N STUFF"),
+      title: Text("Düzenle veya Sil"),
       content: TextField(
         controller: _c,
       ),
       actions: [
         FlatButton(
             onPressed: () {
+              deleteDrink();
+            //print("SİLDİM LAAAAAN");
+            },
+            child: Text("SİL")),
+        FlatButton(
+            onPressed: () {
               this._text = _c.text;
               editDrinkName();
+            
             },
-            child: Text("bir buttın!")),
+            child: Text("Tamam hocam!")),
         FlatButton(
-            onPressed: () =>
-                Navigator.of(context, rootNavigator: true).pop('dialog'),
+            onPressed: () {
+              
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+                },
             child: Text("cancel"))
       ],
     );
